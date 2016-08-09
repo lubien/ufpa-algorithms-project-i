@@ -8,9 +8,17 @@ typedef struct {
 	float price;
 } product;
 
-#define STOCK_LEN 2
+#define STOCK_LEN 100
 
 product stock[STOCK_LEN];
+
+void wait() {
+	char foo;
+
+	printf("\nRetorne algo para continuar\n");
+
+	scanf("%s", &foo);
+}
 
 int readStock() {
 	int i;
@@ -44,7 +52,7 @@ int displaySection() {
 	char section;
 
 	printf("Setor?\n");
-	scanf("%c", &section);
+	scanf("%s", &section);
 
 	int i, count_prod = 0;
 	for (i = 0; i < STOCK_LEN; i++) {
@@ -52,6 +60,8 @@ int displaySection() {
 	}
 
 	printf("Quantidade de produtos diferentes: %i\n", count_prod);
+
+	wait();
 
 	system("clear");
 }
@@ -66,13 +76,34 @@ int amountPaid() {
 
 	printf("Total gasto %.2f\n", total);
 
+	wait();
+
 	system("clear");
 
 	return 0;
 }
 
 int main() {
-	printf("MENU:\n\n");
+	printf("MENU\n\n");
+	printf("1 - Ler vetor\n");
+	printf("2 - Busca setor\n");
+	printf("3 - Total de capital\n");
+	printf("0 - Sair\n");
+
+	printf("\n\n");
+
+	int action;
+	scanf("%i", &action);
+
+	switch (action) {
+		case 0: break;
+		case 1: readStock(); main(); break;
+		case 2: displaySection(); main(); break;
+		case 3: amountPaid(); main(); break;
+		default:
+			printf("Comando inválido\n");
+			main();
+	}
 
 	return 0;
 }
