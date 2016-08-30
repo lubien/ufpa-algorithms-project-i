@@ -52,6 +52,7 @@ void insert(struct Node** node, int at, int value) {
 	new->next = after;
 	new->prev = current;
 	current->next = new;
+	after->prev = new;
 }
 
 void shift(struct Node** node) {
@@ -152,8 +153,8 @@ int main() {
 	insert(&node, 1, 100);
 	print(&node);
 
-	printf("removeAt(1);\n");
-	removeAt(&node, 1);
+	printf("removeAt(2);\n");
+	removeAt(&node, 2);
 	print(&node);
 
 	return 0;
