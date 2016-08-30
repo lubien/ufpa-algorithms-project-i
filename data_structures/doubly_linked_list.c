@@ -30,6 +30,7 @@ void push(struct Node** node, int value) {
 		current = current->next;
 	}
 
+	new->prev = current;
 	current->next = new;
 }
 
@@ -49,6 +50,7 @@ void insert(struct Node** node, int at, int value) {
 
 	struct Node* after = current->next;
 	new->next = after;
+	new->prev = current;
 	current->next = new;
 }
 
@@ -86,13 +88,11 @@ void removeAt(struct Node** node, int at) {
 		current = current->next;
 	}
 
-	printf("%i anterior\n", current->prev->value);
-	printf("%i atual\n", current->value);
-	printf("%i proximo\n", current->next->value);
-
 	struct Node* before = current->prev;
 	struct Node* after = current->next;
 	free(current);
+	before->next = after;
+	after->prev = before;
 }
 
 void print(struct Node** node) {
